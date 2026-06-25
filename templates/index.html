@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Smart Factory Dashboard</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background-color: #121212;
+            color: white;
+            padding: 30px;
+        }
+
+        h1{
+            color: #00bfff;
+            margin-bottom: 30px;
+        }
+
+        .navbar{
+
+            background-color: #1f1f1f;
+
+            padding: 15px;
+
+                margin-bottom: 30px;
+
+            border-radius: 10px;
+
+             box-shadow: 0px 0px 10px #00bfff;
+        }
+
+         .navbar a{
+
+        color: white;
+
+        text-decoration: none;
+
+        margin-right: 20px;
+
+        font-size: 18px;
+
+        font-weight: bold;
+    }
+
+    .dashboard{
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+    }    
+
+        .card{
+            background: #1e1e1e;
+            width: 300px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px #00bfff;
+            min-height: 250px;
+
+        }
+
+        .status-on{
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-off{
+            color: red;
+            font-weight: bold;
+        }
+
+        .alert{
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+    <a href="/">Dashboard</a>
+
+    <a href="/history">History</a>
+
+    </div>
+
+    <h1>Smart Factory Dashboard</h1>
+
+    <div class="dashboard">
+
+        <div class="card">
+
+            <h2>Machine Status</h2>
+
+            {% if machine_status == "ON" %}
+                <p class="status-on">{{ machine_status }}</p>
+            {% else %}
+                <p class="status-off">{{ machine_status }}</p>
+            {% endif %}
+
+        </div>
+
+        <div class="card">
+
+            <h2>Temperature</h2>
+
+            <p>{{ temperature }} °C</p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Efficiency</h2>
+
+            <p>{{ efficiency }} %</p>
+
+        </div>
+
+        <div class="card">
+
+            <h2>Alert Status</h2>
+
+            {% if temperature > 40 %}
+                <p class="alert">High Temperature Alert!</p>
+            {% else %}
+                <p>System Normal</p>
+            {% endif %}
+
+        </div>
+        
+        <div class="card">
+
+            <h2>Temperature Graph</h2>
+
+            <canvas id="tempChart"></canvas>
+
+         </div>
+    </div>
+
+    <script>
+
+    const ctx = document.getElementById('tempChart').getContext('2d');
+
+    const tempChart = new Chart(ctx, {
+
+        type: 'line',
+
+        data: {
+
+            labels: ['1', '2', '3', '4', '5'],
+
+            datasets: [{
+
+                label: 'Temperature',
+
+                data: [30, 35, 28, 40, Number('{{ temperature | tojson }}')],
+
+                fill: false,
+
+                tension: 0.3,
+
+                borderWidth: 3
+
+            }]
+
+        },
+
+        options: {
+
+            
+            responsive: true,
+
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: {
+                        color: 'white'
+                    }
+                }
+            },
+
+scales: {
+    x: {
+        ticks: {
+            color: 'white'
+        }
+    },
+    y: {
+        ticks: {
+            color: 'white'
+        }
+    }
+}
+
+                           
+
+        
+
+        }
+
+    });
+
+    </script>
+    <script>
+
+        setTimeout(function(){
+
+            location.reload();
+
+        }, 5000);
+
+    </script>
+</body>
+
+</html>plugins
