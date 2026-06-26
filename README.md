@@ -94,8 +94,6 @@ Returns latest factory data in JSON format.
 * Email alerts
 * Live chart updates
 
-## Author
 
-IIT Ropar
 Bhymi M Manoj
 IIT Ropar
