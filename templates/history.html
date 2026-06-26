@@ -4,7 +4,7 @@
 <head>
 
     <title>Factory History</title>
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
         .navbar{
 
@@ -77,6 +77,7 @@
             <th>Temperature</th>
             <th>Machine Status</th>
             <th>Efficiency</th>
+            <th>Timestamp</th>
         </tr>
 
         {% for record in records %}
@@ -85,11 +86,33 @@
 
             <td>{{ record.id }}</td>
 
-            <td>{{ record.temperature }} °C</td>
+            <td>
+                {% if record.temperature > 40 %}
+                <span style="color:red; font-weight:bold;">
+                    {{ record.temperature }} °C
+                </span>
+                {% else %}
+                <span style="color:lime; font-weight:bold;">
+                    {{ record.temperature }} °C
+                </span>
+                {% endif %}
+            </td>
 
-            <td>{{ record.machine_status }}</td>
+            <td>
+                {% if record.machine_status == "ON" %}
+                <span style="color:lime; font-weight:bold;">
+                    {{ record.machine_status }}
+                </span>
+                {% else %}
+                <span style="color:red; font-weight:bold;">
+                     {{ record.machine_status }}
+                </span>
+                {% endif %}
+            </td>
 
             <td>{{ record.efficiency }} %</td>
+
+            <td>{{ record.timestamp }}</td>
 
         </tr>
 

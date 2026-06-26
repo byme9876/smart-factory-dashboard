@@ -1,0 +1,89 @@
+ body{
+            font-family: Arial;
+            background-color: #121212;
+            color: white;
+            padding: 30px;
+        }
+
+        h1{
+            color: #00bfff;
+            margin-bottom: 30px;
+        }
+
+        .navbar{
+
+            background-color: #1f1f1f;
+
+            padding: 15px;
+
+                margin-bottom: 30px;
+
+            border-radius: 10px;
+
+             box-shadow: 0px 0px 10px #00bfff;
+        }
+
+         .navbar a{
+
+        color: white;
+
+        text-decoration: none;
+
+        margin-right: 20px;
+
+        font-size: 18px;
+
+        font-weight: bold;
+    }
+
+    .dashboard{
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+    }    
+
+        .card{
+            background: #1e1e1e;
+            width: 300px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 0px 15px #00bfff;
+            min-height: 250px;
+
+        }
+
+        .status-on{
+            color: green;
+            font-weight: bold;
+        }
+
+        .status-off{
+            color: red;
+            font-weight: bold;
+        }
+
+        .alert{
+            color: red;
+            font-weight: bold;
+        }
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            background: #1e1e1e;
+        }
+
+        th{
+            background-color: #00bfff;
+            color: black;
+            border: 1px solid gray;
+            padding: 12px;
+    
+        }
+
+        td{
+            color: white !important;
+            background-color: #1e1e1e;
+            border: 1px solid gray;
+            padding: 12px;
+            text-align: center;
+        }

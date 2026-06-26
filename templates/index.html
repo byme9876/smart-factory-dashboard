@@ -2,81 +2,12 @@
 <html>
 
 <head>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <title>Smart Factory Dashboard</title>
 
-    <style>
-
-        body{
-            font-family: Arial;
-            background-color: #121212;
-            color: white;
-            padding: 30px;
-        }
-
-        h1{
-            color: #00bfff;
-            margin-bottom: 30px;
-        }
-
-        .navbar{
-
-            background-color: #1f1f1f;
-
-            padding: 15px;
-
-                margin-bottom: 30px;
-
-            border-radius: 10px;
-
-             box-shadow: 0px 0px 10px #00bfff;
-        }
-
-         .navbar a{
-
-        color: white;
-
-        text-decoration: none;
-
-        margin-right: 20px;
-
-        font-size: 18px;
-
-        font-weight: bold;
-    }
-
-    .dashboard{
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-    }    
-
-        .card{
-            background: #1e1e1e;
-            width: 300px;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0px 0px 15px #00bfff;
-            min-height: 250px;
-
-        }
-
-        .status-on{
-            color: green;
-            font-weight: bold;
-        }
-
-        .status-off{
-            color: red;
-            font-weight: bold;
-        }
-
-        .alert{
-            color: red;
-            font-weight: bold;
-        }
-
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
 </head>
 
@@ -84,9 +15,9 @@
 
     <div class="navbar">
 
-    <a href="/">Dashboard</a>
+        <a href="/">Dashboard</a>
 
-    <a href="/history">History</a>
+        <a href="/history">History</a>
 
     </div>
 
@@ -133,80 +64,99 @@
             {% endif %}
 
         </div>
-        
+
         <div class="card">
 
             <h2>Temperature Graph</h2>
 
             <canvas id="tempChart"></canvas>
 
-         </div>
+        </div>
+
     </div>
+
+    <footer>
+
+        Smart Factory Dashboard © 2026
+
+    </footer>
 
     <script>
 
-    const ctx = document.getElementById('tempChart').getContext('2d');
+        const ctx = document.getElementById('tempChart').getContext('2d');
 
-    const tempChart = new Chart(ctx, {
+        new Chart(ctx, {
 
-        type: 'line',
+            type: 'line',
 
-        data: {
+            data: {
 
-            labels: ['1', '2', '3', '4', '5'],
+                labels: {{ labels|tojson }},
 
-            datasets: [{
+                datasets: [{
 
-                label: 'Temperature',
+                    label: 'Temperature',
 
-                data: [30, 35, 28, 40, Number('{{ temperature | tojson }}')],
+                    data: {{ temp_values|tojson }},
 
-                fill: false,
+                    fill: false,
 
-                tension: 0.3,
+                    tension: 0.3,
 
-                borderWidth: 3
+                    borderWidth: 3
 
-            }]
+                }]
 
-        },
-
-        options: {
-
-            
-            responsive: true,
-
-            plugins: {
-                legend: {
-                    display: true,
-                    labels: {
-                        color: 'white'
-                    }
-                }
             },
 
-scales: {
-    x: {
-        ticks: {
-            color: 'white'
-        }
-    },
-    y: {
-        ticks: {
-            color: 'white'
-        }
-    }
-}
+            options: {
 
-                           
+                responsive: true,
 
-        
+                plugins: {
 
-        }
+                    legend: {
 
-    });
+                        labels: {
+
+                            color: 'white'
+
+                        }
+
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+
+                        ticks: {
+
+                            color: 'white'
+
+                        }
+
+                    },
+
+                    y: {
+
+                        ticks: {
+
+                            color: 'white'
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        });
 
     </script>
+
     <script>
 
         setTimeout(function(){
@@ -216,6 +166,7 @@ scales: {
         }, 5000);
 
     </script>
+
 </body>
 
-</html>plugins
+</html>
